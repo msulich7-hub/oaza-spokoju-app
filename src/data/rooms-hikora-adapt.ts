@@ -1,0 +1,210 @@
+import { Room } from "@/types/project";
+import { buildingEnlarged } from "./karta-techniczna";
+
+const W = buildingEnlarged.widthWE;
+const D = buildingEnlarged.lengthNS;
+
+/**
+ * Adaptacja ARCHON „Dom pod hikorą 3” na działce Oazy Spokoju
+ * Bryła 14×10,84 m · salon HST na WSCHÓD (las) · garaż na ZACHÓD (droga)
+ * Układ bez nakładających się pomieszczeń
+ */
+export const parterHikoraAdapt: Room[] = [
+  {
+    id: "garaz",
+    namePL: "Garaż",
+    name: "Garage",
+    floor: "parter",
+    x: 0, y: 0, width: 6.5, height: 6.0,
+    orientation: "SW",
+    description: "1-stanowiskowy jak Hikora — pancerz od drogi",
+    color: "#D4C5B0",
+  },
+  {
+    id: "kuchnia",
+    namePL: "Kuchnia + jadalnia",
+    name: "Kitchen",
+    floor: "parter",
+    x: 6.5, y: 0, width: 4.0, height: 5.5,
+    orientation: "SE",
+    description: "~22 m² — narożne słońce południowe",
+    color: "#E0D8C8",
+  },
+  {
+    id: "spizarnia",
+    namePL: "Spiżarnia",
+    name: "Pantry",
+    floor: "parter",
+    x: 10.5, y: 0, width: 3.5, height: 2.5,
+    orientation: "S",
+    description: "Przy kuchni — jak w Hikorze",
+    color: "#D8CFC5",
+  },
+  {
+    id: "salon",
+    namePL: "Salon + HST → las",
+    name: "Living Room",
+    floor: "parter",
+    x: 10.5, y: 2.5, width: 3.5, height: 8.34,
+    orientation: "E",
+    description: "~29 m² · przeszklenie HST na wschód (las)",
+    color: "#C5D5A0",
+  },
+  {
+    id: "wiatrolap",
+    namePL: "Wiatrołap",
+    name: "Vestibule",
+    floor: "parter",
+    x: 0, y: 6.0, width: 3.5, height: 2.5,
+    orientation: "W",
+    color: "#E8DFD4",
+  },
+  {
+    id: "hol",
+    namePL: "Hol",
+    name: "Hall",
+    floor: "parter",
+    x: 3.5, y: 6.0, width: 3.0, height: 4.84,
+    orientation: "C",
+    description: "Oś hol → salon → las",
+    color: "#E8DFD4",
+  },
+  {
+    id: "kotlownia",
+    namePL: "Kotłownia",
+    name: "Utility",
+    floor: "parter",
+    x: 0, y: 8.5, width: 3.5, height: 2.34,
+    orientation: "NW",
+    description: "Rekuperacja + pompa ciepła",
+    color: "#C8BEB2",
+  },
+  {
+    id: "biuro",
+    namePL: "Gabinet",
+    name: "Study",
+    floor: "parter",
+    x: 6.5, y: 5.5, width: 4.0, height: 3.5,
+    orientation: "N",
+    description: "Pokój z wyjściem na taras — wzór Hikora",
+    color: "#C5D5C0",
+  },
+  {
+    id: "lazienka-gosc",
+    namePL: "Łazienka",
+    name: "Guest WC",
+    floor: "parter",
+    x: 6.5, y: 9.0, width: 2.5, height: 1.84,
+    orientation: "N",
+    color: "#B8CCE0",
+  },
+  {
+    id: "schody",
+    namePL: "Schody",
+    name: "Stairs",
+    floor: "parter",
+    x: 9.0, y: 9.0, width: 1.5, height: 1.84,
+    orientation: "C",
+    color: "#D8D0C8",
+  },
+];
+
+export const pietroHikoraAdapt: Room[] = [
+  {
+    id: "sypialnia2",
+    namePL: "Pokój dziecka 1",
+    name: "Bedroom 2",
+    floor: "pietro",
+    x: 0, y: 0, width: 4.5, height: 5.5,
+    orientation: "S",
+    color: "#D4DEC8",
+  },
+  {
+    id: "sypialnia3",
+    namePL: "Pokój dziecka 2",
+    name: "Bedroom 3",
+    floor: "pietro",
+    x: 4.5, y: 0, width: 4.5, height: 5.5,
+    orientation: "S",
+    color: "#D4DEC8",
+  },
+  {
+    id: "pralnia",
+    namePL: "Pralnia",
+    name: "Laundry",
+    floor: "pietro",
+    x: 0, y: 5.5, width: 4.0, height: 5.34,
+    orientation: "W",
+    color: "#C8BEB2",
+  },
+  {
+    id: "lazienka-dzieci",
+    namePL: "Łazienka dzieci",
+    name: "Kids Bath",
+    floor: "pietro",
+    x: 4.0, y: 5.5, width: 3.5, height: 5.34,
+    orientation: "W",
+    color: "#B8CCE0",
+  },
+  {
+    id: "korytarz",
+    namePL: "Korytarz",
+    name: "Hallway",
+    floor: "pietro",
+    x: 4.0, y: 8.0, width: 3.0, height: 2.84,
+    orientation: "C",
+    color: "#E8DFD4",
+  },
+  {
+    id: "garderoba",
+    namePL: "Garderoba 1",
+    name: "Closet",
+    floor: "pietro",
+    x: 9.0, y: 0, width: 2.5, height: 3.5,
+    orientation: "NE",
+    color: "#D8CFC5",
+  },
+  {
+    id: "garderoba-2",
+    namePL: "Garderoba 2",
+    name: "Closet 2",
+    floor: "pietro",
+    x: 11.5, y: 0, width: 2.5, height: 3.5,
+    orientation: "NE",
+    color: "#D8CFC5",
+  },
+  {
+    id: "lazienka-master",
+    namePL: "Łazienka rodziców",
+    name: "Master Bath",
+    floor: "pietro",
+    x: 9.0, y: 3.5, width: 5.0, height: 2.0,
+    orientation: "NE",
+    color: "#B8CCE0",
+  },
+  {
+    id: "master",
+    namePL: "Sypialnia rodziców",
+    name: "Master",
+    floor: "pietro",
+    x: 9.0, y: 5.5, width: 5.0, height: 5.34,
+    orientation: "E",
+    description: "Poranne słońce · widok na las",
+    color: "#C5D5C0",
+  },
+];
+
+export const hikoraAdaptFootprint = { widthWE: W, lengthNS: D };
+
+export const hikoraAdaptMeta = {
+  name: "Adaptacja Hikora — salon od lasu",
+  footprint: `${W} × ${D} m`,
+  parterArea: "~85 m²",
+  pietroArea: "~75 m²",
+  highlights: [
+    "Salon + HST na wschód (las)",
+    "Garaż + wiatrołap od zachodu (droga)",
+    "Spiżarnia, gabinet, 2 łazienki, 2 garderoby",
+    "Rekuperacja zamiast wentylacji grawitacyjnej Hikory",
+  ],
+};

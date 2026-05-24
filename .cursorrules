@@ -1,0 +1,46 @@
+# Oaza Spokoju — AI Architecture Copilot
+
+## Project overview
+Next.js dashboard for the "Oaza Spokoju" house project in Cieszyn, Poland. Chat uses **Cursor SDK** with **Composer 2.5** agent (plan mode) — full project context injected via prompt.
+
+## Tech stack
+- **Framework:** Next.js 15 (App Router, TypeScript)
+- **AI:** Cursor SDK (`@cursor/sdk`) — Composer 2.5, `mode: "plan"`
+- **Styling:** Tailwind CSS 4
+- **Visualization:** SVG (floor plans), Three.js (3D — future)
+- **Language:** TypeScript throughout
+
+## Architecture
+
+```
+oaza-spokoju-app/
+├── .env.local                    # CURSOR_API_KEY
+├── src/
+│   ├── app/api/chat/route.ts     # SSE streaming → Cursor SDK
+│   ├── lib/
+│   │   ├── cursor-agent.ts       # Agent session manager
+│   │   ├── agent-prompt.ts       # Project context + action instructions
+│   │   └── agent-actions.ts      # Parse [[ACTION:...]] blocks
+│   ├── components/
+│   │   ├── Dashboard.tsx         # 3-panel layout + action handlers
+│   │   ├── ChatPanel.tsx         # Custom streaming chat UI
+│   │   ├── VisualizationPanel.tsx
+│   │   ├── FloorPlanSVG.tsx
+│   │   └── TopographyView.tsx
+│   └── data/
+│       ├── project-context.ts
+│       └── rooms.ts
+```
+
+## Agent actions (UI control)
+
+Agent emits blocks at end of response:
+`[[ACTION:{"name":"showFloorPlan","params":{"floor":"parter"}}]]`
+
+Available: `showFloorPlan`, `showPlotMap`, `showTopography`, `highlightRoom`
+
+## Design direction
+- Japandi / Biophilic — warm wood, muted greens
+- Font: DM Sans + DM Serif Display
+- Colors: #F5F0EB bg, #2D5016 accent
+- Agent speaks Polish by default
