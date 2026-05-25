@@ -1,6 +1,6 @@
 import type { Room, Setbacks } from "./project";
 
-export type TransformType = "none" | "mirror-ew" | "mirror-ns" | "adapt-hikora";
+export type TransformType = "none" | "mirror-ew" | "mirror-ns" | "adapt-hikora" | "family-program";
 
 export interface BuildingSize {
   widthWE: number;

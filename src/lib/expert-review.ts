@@ -138,6 +138,61 @@ function scoreForAdaptHikora(hikoraRef: boolean): Record<string, { score: number
   };
 }
 
+function scoreForFamilyProgram(): Record<string, { score: number; summary: string; recs: string[]; critical?: string }> {
+  return {
+    landscape: {
+      score: 9,
+      summary: "Salon na południu z tarasem S+E — słońce i las; garaż od północy nie zjada ogrodu wschodniego.",
+      recs: ["Taras L przy salonie", "Kaskada ogrodu za domem (E)", "Zieleń ekranująca od sąsiada 48R (N)"],
+    },
+    energy: {
+      score: 8,
+      summary: "Duże przeszklenie S+E wymaga rolet i okapów; kuchnia od północy = mniejsze zyski letnie — plus.",
+      recs: ["PHPP z HST południe/wschód", "Rekuperacja", "Świetlik nad schodami"],
+    },
+    urban: {
+      score: 8,
+      summary: "Bryła 14×11 m, P=4 m, Poł=6,05 m — mieści się na działce 43,72×21,05 m.",
+      recs: ["Obrys 1:500", "Wypis MPZP"],
+    },
+    acoustic: {
+      score: 8,
+      summary: "Garaż i kotłownia od północy oddzielają strefę techniczną od salonu; biuro na zachodzie przy drodze — ekran fasady.",
+      recs: ["Ściana N Rw 55 dB (48R)", "Drzwi garażowe dobrej klasy"],
+    },
+    daylight: {
+      score: 9,
+      summary: "Salon południe+wschód — optymalny kompromis światła i widoku; dzieci zachód — popołudnie, master wschód — poranek i las.",
+      recs: ["HST max. wschód, okna południowe nisko", "Rolety zewnętrzne S", "Gabinet W — nie przeszklenia pełne"],
+    },
+    geo: {
+      score: 7,
+      summary: "Posadowienie bez zmian; drenaż NW nadal krytyczny przy garażu od północy.",
+      recs: ["Odwierty geotechniczne", "Opaska drenażowa N i W garażu"],
+    },
+    interior: {
+      score: 9,
+      summary: "Program zgodny z briefem inwestora: garaż 2-st. N, łazienka parter, master+bath+garderoba, dzieci W, sala fitness.",
+      recs: ["Oś wejście→schody→salon→las", "Spiżarnia przy kuchni — opcjonalnie"],
+    },
+    hvac: {
+      score: 8,
+      summary: "Kotłownia przy garażu N — krótkie przyłącza z północy działki; wieża W możliwa.",
+      recs: ["Projekt rekuperacji", "Cicha jednostka PC"],
+    },
+    garden: {
+      score: 9,
+      summary: "Taras L (S+E) przy salonie; ogród ~20 m na wschód bez kolizji z garażem.",
+      recs: ["Taras 30–45 cm niżej progu HST", "Markiza lub pergola na południu"],
+    },
+    cost: {
+      score: 7,
+      summary: "Garaż 2-st. + duży salon = koszt; prostokąt 14×11 tańszy niż skomplikowany kwadrat.",
+      recs: ["Kosztorys po zamrożeniu HST", "Value engineering elewacji W"],
+    },
+  };
+}
+
 function scoreBaseline(): Record<string, { score: number; summary: string; recs: string[]; critical?: string }> {
   return {
     landscape: { score: 7, summary: "Kaskada ogrodu ma sens przy ok. 3 m różnicy wysokości z NMT.", recs: ["Drenaż NW", "Płytkie tarasy"] },
@@ -261,7 +316,8 @@ function resolveScores(variant: ProjectVariant) {
     (l) => findReferenceByUrl(l.url)?.id === "archon-hikora-3",
   );
 
-  return variant.transform === "adapt-hikora" ? scoreForAdaptHikora(hikoraRef) :
+  return variant.transform === "family-program" ? scoreForFamilyProgram() :
+    variant.transform === "adapt-hikora" ? scoreForAdaptHikora(hikoraRef) :
     variant.transform === "mirror-ew" ? scoreForMirrorEW(hikoraRef) :
     variant.transform === "mirror-ns" ? scoreForMirrorEW(hikoraRef) :
     scoreBaseline();
@@ -385,6 +441,8 @@ export function generateExpertDebate(
 
 function idealRationale(variant: ProjectVariant, score: number): string {
   switch (variant.transform) {
+    case "family-program":
+      return `Program rodzinny (${score}/10): garaż 2-st. od północy, salon na południu z tarasem S+E, master na wschodzie — dopasowany do briefu inwestora i działki.`;
     case "adapt-hikora":
       return `Adaptacja Hikory zbiera ${score}/10, bo zachowuje salon od lasu, spełnia odległości 4 m i daje najlepszy balans funkcji vs formalności.`;
     case "mirror-ew":
@@ -398,6 +456,8 @@ function idealRationale(variant: ProjectVariant, score: number): string {
 
 function idealAlternativeWhen(variant: ProjectVariant): string {
   switch (variant.transform) {
+    case "family-program":
+      return "Gdy priorytetem jest Twój układ: garaż północ, salon południe, dzieci zachód, master wschód.";
     case "adapt-hikora":
       return "Gdy chcesz maksimum funkcji katalogowej i salon od lasu bez odbicia bryły.";
     case "mirror-ew":
