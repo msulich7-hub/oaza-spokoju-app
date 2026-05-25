@@ -153,7 +153,7 @@ export function createHikoraAdaptVariant(): ProjectVariant {
 export function createFamilyProgramVariant(): ProjectVariant {
   return createVariantFromIntent(
     "Program rodzinny — garaż N, salon S/E",
-    "Garaż 2-st. od północy, kuchnia północ, salon południe z tarasem S+E, dzieci zachód, master wschód, łazienka parter, 14×11 m",
+    "Garaż 2-st. od północy, kuchnia+salon południe/wschód (słońce), dzieci zachód, master wschód, łazienka parter, 14×11 m",
     "family-program",
   );
 }

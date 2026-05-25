@@ -172,8 +172,8 @@ function scoreForFamilyProgram(): Record<string, { score: number; summary: strin
     },
     interior: {
       score: 9,
-      summary: "Program zgodny z briefem inwestora: garaż 2-st. N, łazienka parter, master+bath+garderoba, dzieci W, sala fitness.",
-      recs: ["Oś wejście→schody→salon→las", "Spiżarnia przy kuchni — opcjonalnie"],
+      summary: "Kuchnia na południu/wschodzie w jednej strefie z salonem — zgodnie z dobrym zwyczajem projektowym; garaż 2-st. N bez zmian.",
+      recs: ["Oś wejście→schody→kuchnia→salon→las", "Spiżarnia między kuchnią a schodami"],
     },
     hvac: {
       score: 8,

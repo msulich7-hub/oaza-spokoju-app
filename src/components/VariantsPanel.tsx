@@ -145,7 +145,7 @@ export function VariantsPanel({
         >
           <span className="font-medium text-accent">Program rodzinny — Twój brief</span>
           <span className="mt-0.5 block text-[10px] text-text-muted">
-            Garaż 2-st. północ · salon południe · taras S+E · dzieci W · master E · 14×11 m
+            Garaż 2-st. północ · kuchnia+salon S/E · taras L · dzieci W · master E
           </span>
         </button>
 

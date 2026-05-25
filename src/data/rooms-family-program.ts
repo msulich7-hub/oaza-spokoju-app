@@ -14,7 +14,7 @@ const D = buildingFamilyProgram.lengthNS;
  * Program inwestora (2026) — układ wewnątrz bryły, bez zmiany stron świata działki.
  * Oś W→E = x, S→N = y, origin SW.
  *
- * Parter: garaż 2-st. + kotłownia od PÓŁNOCY, kuchnia północ, salon POŁUDNIE (słońce + taras S/E),
+ * Parter: garaż 2-st. + kotłownia od PÓŁNOCY; strefa dzienna POŁUDNIE+WSCHÓD (kuchnia S/SE + salon E z HST),
  * wejście ZACHÓD, łazienka gościnna (prysznic + WC).
  * Piętro: dzieci ZACHÓD, master WSCHÓD + garderoba + duża łazienka, sala fitness / gabinet.
  */
@@ -50,12 +50,12 @@ export const parterFamilyProgram: Room[] = [
     name: "Kitchen",
     namePL: "Kuchnia + jadalnia",
     floor: "parter",
-    x: 9.3,
-    y: 7.8,
-    width: 4.7,
-    height: 3.2,
-    orientation: "N",
-    description: "~15 m², okna na północ (równomierne światło robocze)",
+    x: 3.8,
+    y: 0,
+    width: 5.5,
+    height: 4.2,
+    orientation: "SE",
+    description: "~23 m², słońce południowe + wschodnie, otwarta na salon i taras S/E",
     color: "#E0D8C8",
   },
   {
@@ -120,7 +120,7 @@ export const parterFamilyProgram: Room[] = [
     width: 10.2,
     height: 7.8,
     orientation: "SE",
-    description: "~80 m², przeszklenie na POŁUDNIE i WSCHÓD (las), wyjście na taras L",
+    description: "Strefa dzienna ~80 m²: kuchnia SW, salon z HST na WSCHÓD+POŁUDNIE, taras L",
     color: "#D4DEC8",
   },
 ];
