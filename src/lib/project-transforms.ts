@@ -3,6 +3,12 @@ import { buildingEnlarged } from "@/data/karta-techniczna";
 import { clampSetbacksToPlot, immutablePlotData, sanitizeVariant } from "@/lib/plot-constraints";
 import { parterRooms, pietroRooms } from "@/data/rooms";
 import { parterHikoraAdapt, pietroHikoraAdapt } from "@/data/rooms-hikora-adapt";
+import {
+  buildingFamilyProgram,
+  familyProgramSetbacks,
+  parterFamilyProgram,
+  pietroFamilyProgram,
+} from "@/data/rooms-family-program";
 import { HIKORA_3_URL } from "@/data/reference-projects";
 import type { Room, Setbacks } from "@/types/project";
 import type { BuildingSize, ProjectVariant, TransformType } from "@/types/variant";
@@ -86,6 +92,18 @@ export function applyTransform(
           pietro: pietroHikoraAdapt,
         },
       };
+    case "family-program":
+      return {
+        buildingSize: {
+          widthWE: buildingFamilyProgram.widthWE,
+          lengthNS: buildingFamilyProgram.lengthNS,
+        },
+        setbacks: { ...familyProgramSetbacks },
+        roomsOverride: {
+          parter: parterFamilyProgram,
+          pietro: pietroFamilyProgram,
+        },
+      };
     default:
       return {
         buildingSize: building,
@@ -132,6 +150,14 @@ export function createHikoraAdaptVariant(): ProjectVariant {
   );
 }
 
+export function createFamilyProgramVariant(): ProjectVariant {
+  return createVariantFromIntent(
+    "Oaza Spokoju — układ finalny panelu",
+    "Werdykt panelu: garaż 2-st. N, salon E+S, pralnia ZN, dzieci Z, master+łazienka+garderoba E, mini-siłownia N, 14×11 m",
+    "family-program",
+  );
+}
+
 export function getBaselineVariant(): ProjectVariant {
   const now = new Date().toISOString();
   const b = getDefaultBuilding();
@@ -152,6 +178,16 @@ export function getBaselineVariant(): ProjectVariant {
 
 export function detectTransformFromIntent(intent: string): TransformType {
   const q = intent.toLowerCase();
+  if (
+    q.includes("garaż od północ") ||
+    q.includes("garaz od polnoc") ||
+    q.includes("program rodzin") ||
+    q.includes("family program") ||
+    q.includes("dzieci zachód") ||
+    q.includes("dzieci zachod")
+  ) {
+    return "family-program";
+  }
   if (
     q.includes("adaptacja hikor") ||
     q.includes("salon od lasu") ||

@@ -4,7 +4,12 @@ import { useState } from "react";
 import type { ReferenceProject } from "@/data/reference-projects";
 import { HIKORA_3_URL } from "@/data/reference-projects";
 import type { ProjectVariant, ReferenceLink, TransformType } from "@/types/variant";
-import { createVariantFromIntent, createHikoraAdaptVariant, detectTransformFromIntent } from "@/lib/project-transforms";
+import {
+  createVariantFromIntent,
+  createFamilyProgramVariant,
+  createHikoraAdaptVariant,
+  detectTransformFromIntent,
+} from "@/lib/project-transforms";
 import { ReferenceCompareCard } from "./ReferenceCompareCard";
 
 interface VariantsPanelProps {
@@ -107,7 +112,14 @@ export function VariantsPanel({
     "mirror-ew": "Lustrzane odbicie E↔W",
     "mirror-ns": "Lustrzane odbicie N↔S",
     "adapt-hikora": "Adaptacja Hikora — salon od lasu",
+    "family-program": "Program rodzinny — garaż N, salon S/E",
   };
+
+  function loadFamilyProgram() {
+    const v = createFamilyProgramVariant();
+    onSave(v);
+    onBuilt?.();
+  }
 
   function loadHikoraAdapt() {
     const v = createHikoraAdaptVariant();
@@ -126,6 +138,17 @@ export function VariantsPanel({
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-3 space-y-4">
+        <button
+          type="button"
+          onClick={loadFamilyProgram}
+          className="w-full rounded-lg border-2 border-accent bg-accent/15 px-3 py-2 text-left text-xs hover:bg-accent/20"
+        >
+          <span className="font-medium text-accent">Oaza — układ finalny panelu</span>
+          <span className="mt-0.5 block text-[10px] text-text-muted">
+            Garaż 2-st. N · salon E+S · pralnia ZN · dzieci Z · master+łaz. E · siłownia N
+          </span>
+        </button>
+
         <button
           type="button"
           onClick={loadHikoraAdapt}
