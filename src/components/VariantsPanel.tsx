@@ -143,9 +143,9 @@ export function VariantsPanel({
           onClick={loadFamilyProgram}
           className="w-full rounded-lg border-2 border-accent bg-accent/15 px-3 py-2 text-left text-xs hover:bg-accent/20"
         >
-          <span className="font-medium text-accent">Program rodzinny — Twój brief</span>
+          <span className="font-medium text-accent">Oaza — układ finalny panelu</span>
           <span className="mt-0.5 block text-[10px] text-text-muted">
-            Garaż 2-st. północ · kuchnia+salon S/E · taras L · dzieci W · master E
+            Garaż 2-st. N · salon E+S · pralnia ZN · dzieci Z · master+łaz. E · siłownia N
           </span>
         </button>
 

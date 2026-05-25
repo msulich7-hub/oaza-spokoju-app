@@ -147,7 +147,7 @@ function scoreForFamilyProgram(): Record<string, { score: number; summary: strin
     },
     energy: {
       score: 8,
-      summary: "Duże przeszklenie S+E wymaga rolet i okapów; kuchnia od północy = mniejsze zyski letnie — plus.",
+      summary: "Duże przeszklenie S+E wymaga rolet i okapów; pralnia ZN i kotłownia N — krótkie instalacje, słabsze zyski na zachodzie dzieci.",
       recs: ["PHPP z HST południe/wschód", "Rekuperacja", "Świetlik nad schodami"],
     },
     urban: {

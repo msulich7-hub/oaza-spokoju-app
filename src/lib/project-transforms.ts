@@ -152,8 +152,8 @@ export function createHikoraAdaptVariant(): ProjectVariant {
 
 export function createFamilyProgramVariant(): ProjectVariant {
   return createVariantFromIntent(
-    "Program rodzinny — garaż N, salon S/E",
-    "Garaż 2-st. od północy, kuchnia+salon południe/wschód (słońce), dzieci zachód, master wschód, łazienka parter, 14×11 m",
+    "Oaza Spokoju — układ finalny panelu",
+    "Werdykt panelu: garaż 2-st. N, salon E+S, pralnia ZN, dzieci Z, master+łazienka+garderoba E, mini-siłownia N, 14×11 m",
     "family-program",
   );
 }
