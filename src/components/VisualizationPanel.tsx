@@ -6,7 +6,7 @@ import { SatelliteMapView } from "./SatelliteMapView";
 import { TopographyView } from "./TopographyView";
 import { HikoraAdaptView } from "./HikoraAdaptView";
 import { VisualizationCoach } from "./VisualizationCoach";
-import { MassingView } from "./MassingView";
+import { Plot3DView } from "./Plot3DView";
 import type { Room, Setbacks, VisualizationState } from "@/types/project";
 
 interface VisualizationPanelProps {
@@ -16,6 +16,7 @@ interface VisualizationPanelProps {
   onShowPlotMap?: () => void;
   onShowTopography?: () => void;
   onShowSatellite?: () => void;
+  onShow3D?: () => void;
   setbacks?: Setbacks;
   roomsForFloor?: Room[];
   hikoraParterRooms?: Room[];
@@ -31,7 +32,7 @@ const viewLabels: Record<VisualizationState["type"], string> = {
   plotmap: "Mapa działki",
   topography: "Topografia",
   satellite: "Zdjęcie satelitarne",
-  "3dview": "Widok 3D",
+  "3dview": "Działka 3D",
 };
 
 export function VisualizationPanel({
@@ -41,6 +42,7 @@ export function VisualizationPanel({
   onShowPlotMap,
   onShowTopography,
   onShowSatellite,
+  onShow3D,
   setbacks,
   roomsForFloor,
   hikoraParterRooms,
@@ -90,6 +92,13 @@ export function VisualizationPanel({
           >
             Satelita
           </button>
+          <button
+            type="button"
+            onClick={() => onShow3D?.()}
+            className="rounded-md border border-border px-2 py-1 text-xs text-text"
+          >
+            3D
+          </button>
         </div>
         {visualization.highlightedRoom && (
           <span className="rounded-full bg-accent/10 px-3 py-1 text-xs text-accent">
@@ -98,7 +107,13 @@ export function VisualizationPanel({
         )}
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col items-center justify-center overflow-auto p-4">
+      <div
+        className={`flex min-h-0 flex-1 flex-col ${
+          visualization.type === "3dview"
+            ? "overflow-hidden p-3"
+            : "items-center justify-center overflow-auto p-4"
+        }`}
+      >
         {showHikoraDual && (
           <HikoraAdaptView
             parterRooms={hikoraParterRooms}
@@ -141,7 +156,7 @@ export function VisualizationPanel({
         )}
         {visualization.type === "topography" && <TopographyView />}
         {visualization.type === "3dview" && (
-          <MassingView
+          <Plot3DView
             variantLabel={variantLabel}
             buildingWidthWE={buildingWidthWE}
             buildingLengthNS={buildingLengthNS}

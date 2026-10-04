@@ -141,6 +141,60 @@ export const kartaTechniczna = {
     powerGas: "ZACHÓD — ul. Północna (e1, gw)",
     telecom: "PÓŁNOCNY-WSCHÓD",
   },
+  /**
+   * Odczyt sieci z GESUT (Krajowa Integracja Uzbrojenia Terenu, WMS), 2026-10-04.
+   * Dane orientacyjne z podglądu — nie pomiar do kopania.
+   * Do wykopów i projektowania przyłączy wymagana jest mapa do celów projektowych.
+   */
+  utilitiesGesut: {
+    source: "GESUT — Krajowa Integracja Uzbrojenia Terenu, WMS",
+    capturedAt: "2026-10-04",
+    accuracyNote:
+      "Odczyt orientacyjny z podglądu WMS. Przedział 4–5 m bez zgadywania centymetrów. Nie jest to pomiar geodezyjny. Do kopania potrzebna jest mapa do celów projektowych.",
+    sewer: {
+      present: true,
+      crossesPlotCenter: false,
+      northOfNorthBoundaryM: { min: 4, max: 5 },
+      northSegmentOnPlot: "4/4",
+      eastSegmentOnPlot: "4/5",
+      westOfEastBoundaryM: { min: 4, max: 5 },
+      description:
+        "Nie przecina środka działki. Na większej części ok. 4–5 m na północ od północnej granicy (dz. 4/4). Przy wschodnim końcu skręca i schodzi na południe ok. 4–5 m od wschodniej granicy, już na dz. 4/5.",
+    },
+    water: {
+      present: true,
+      alignment: "north-edge" as const,
+      description: "Wodociąg wzdłuż północnej krawędzi działki.",
+    },
+    power: {
+      present: true,
+      westEdge: true,
+      eastOfPlot: true,
+      description: "Prąd przy zachodniej krawędzi (ul. Północna) oraz linia na wschód od działki.",
+    },
+    gas: {
+      present: false,
+      note: "Gazu nie było w kadrze GESUT z 2026-10-04.",
+    },
+    telecom: {
+      present: false,
+      note: "Telekomunikacji nie było w kadrze GESUT z 2026-10-04.",
+    },
+  },
+  /**
+   * Ustalony układ ogrodu (koncepcja, nie pomiar geodezyjny).
+   * Drzewa trzymają odstęp od wschodniego pasa kanalizacji z odczytu GESUT.
+   */
+  gardenLayout: {
+    terraceEastFromWallApproxM: 6,
+    terraceSides: ["east", "south"] as const,
+    fruitTrees: {
+      appleFromWestM: 31,
+      pearFromWestM: 33.5,
+      rowsFromNorthM: [8, 13.5] as const,
+    },
+    cascadeEastOfTerrace: ["trawnik", "trawy", "wyższy przy wschodniej granicy"] as const,
+  },
   designPhilosophy: [
     "Warm Minimalism / Japandi / Biophilic",
     "Pancerz zachodni — garaż, kotłownia",
@@ -230,9 +284,18 @@ Odległości od granic (min. 4 m od P i Poł wg przepisów / sąsiada 48R):
 - PARTER Z: garaż, wiatrołap, kotłownia | P: biuro/gabinet | W: salon HST ~30 m² | Poł: kuchnia+spiżarnia
 - PIĘTRO W: master + garderoba | Poł: 2 sypialnie dzieci | Z: pralnia, 2. łazienka dzieci
 
-## PRZYŁĄCZA
+## PRZYŁĄCZA (PZT — koncepcja)
 - ${kartaTechniczna.utilities.waterSewer}
 - ${kartaTechniczna.utilities.powerGas}
+
+## SIECI GESUT (${kartaTechniczna.utilitiesGesut.capturedAt}, odczyt orientacyjny)
+- Źródło: ${kartaTechniczna.utilitiesGesut.source}
+- ${kartaTechniczna.utilitiesGesut.accuracyNote}
+- Kanalizacja: ${kartaTechniczna.utilitiesGesut.sewer.description}
+- Woda: ${kartaTechniczna.utilitiesGesut.water.description}
+- Prąd: ${kartaTechniczna.utilitiesGesut.power.description}
+- Gaz: ${kartaTechniczna.utilitiesGesut.gas.note}
+- Telekomunikacja: ${kartaTechniczna.utilitiesGesut.telecom.note}
 
 ## KONCEPCJA
 ${kartaTechniczna.designPhilosophy.map((x) => `- ${x}`).join("\n")}

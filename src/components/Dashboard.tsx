@@ -404,7 +404,7 @@ export function Dashboard() {
 
         <button type="button" onClick={() => show3D()} className="toolbar-btn">
 
-          Bryła 3D
+          Działka 3D
 
         </button>
 
@@ -519,6 +519,8 @@ export function Dashboard() {
             onShowSatellite={showSatellite}
 
             onShowTopography={showTopography}
+
+            onShow3D={show3D}
 
           />
 

@@ -26,8 +26,8 @@ const viewCopy: Record<VisualizationState["type"], { title: string; points: stri
     points: ["NMT: 366,8-369,8 m n.p.m.", "Teren rośnie NW→SE", "Projekt drenażu po mapie 1:500"],
   },
   "3dview": {
-    title: "Docelowa wizualizacja 3D",
-    points: ["Bryła + cień + materiał", "Widok od wjazdu i ogrodu", "Porównanie wariantów obok siebie"],
+    title: "Oaza na działce 4/5",
+    points: ["Obracaj kamerę — spadek NMT NW→SE", "Taras E/S, kaskada i 4 drzewa owocowe", "GESUT: podgląd sieci, nie mapa do kopania"],
   },
 };
 

@@ -12,6 +12,7 @@ export const IMMUTABLE = {
   elevation: kartaTechniczna.elevation,
   neighbors: kartaTechniczna.neighbors,
   utilities: kartaTechniczna.utilities,
+  utilitiesGesut: kartaTechniczna.utilitiesGesut,
   cardinal: {
     west: "Zachód — dz. 4/10 / dojazd od ul. Północnej",
     east: "Wschód — dz. 25/27, 25/20, 25/18",
@@ -43,7 +44,7 @@ export const IMMUTABLE_FIELDS = [
   "strony świata (Z=dojazd od ul. Północnej, P=dz. 4/4, Poł=dz. 4/6)",
   "nachylenie terenu i rzędne NMT (teren rośnie NW→SE)",
   "sąsiedztwo (dz. 4/10, 4/4, 4/6, 25/27, 25/20, 25/18)",
-  "przyłącza (woda/kan. z północy, prąd/gaz z zachodu)",
+  "przyłącza (GESUT 2026-10-04: woda wzdłuż północy, kanalizacja głównie na dz. 4/4 i pas wschodni 4/5, prąd Z i E; gaz/tel. nie w kadrze)",
   "MPZP 67MN, klasa PsIV",
 ] as const;
 
