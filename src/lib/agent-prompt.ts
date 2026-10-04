@@ -35,7 +35,7 @@ Dostępne akcje:
 - showPlotMap — params: {}
 - showSatellite — params: {} (zdjęcie satelitarne z sąsiedztwem)
 - showTopography — params: {}
-- show3D — params: {} (makieta bryły i relacja z ogrodem)
+- show3D — params: {} (interaktywny widok 3D działki, ogrodu i sieci GESUT)
 - highlightRoom — params: { "roomId": "garaz|wiatrolap|kotlownia|biuro|lazienka-gosc|schody|salon|kuchnia|master|garderoba|lazienka-master|sypialnia2|sypialnia3|pralnia|lazienka-dzieci|korytarz", "floor"?: "parter"|"pietro" }
 
 Możesz dodać wiele bloków [[ACTION:...]] w jednej odpowiedzi.

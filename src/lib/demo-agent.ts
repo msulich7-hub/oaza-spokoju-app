@@ -64,7 +64,7 @@ export function buildDemoResponse(message: string): DemoResponse {
 
   if (q.includes("3d") || q.includes("bryla") || q.includes("bryła") || q.includes("makieta") || q.includes("elewac")) {
     return {
-      text: "Pokazuję makietę bryły: dach dwuspadowy, HST na ogród, taras E/S i kontekst stron świata. To widok koncepcyjny, nie render fotorealistyczny.",
+      text: "Pokazuję widok 3D działki 4/5: spadek NMT, dach 42°, taras E/S, kaskadę ogrodu, cztery drzewa owocowe i orientacyjny odczyt sieci GESUT. To podgląd, nie mapa do kopania.",
       actions: [{ name: "show3D", params: {} }],
     };
   }
