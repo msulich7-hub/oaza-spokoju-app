@@ -31,12 +31,12 @@ import {
 } from "@/lib/plot-3d-layout";
 
 const GROUND_COLOR = {
-  lawn: new THREE.Color("#7d9a55"),
-  grass: new THREE.Color("#6b8a48"),
-  meadow: new THREE.Color("#5c7a3f"),
-  wet: new THREE.Color("#4a5c3a"),
-  drive: new THREE.Color("#b7aa96"),
-  sewer: new THREE.Color("#6d5a48"),
+  lawn: new THREE.Color("#4f7a32"),
+  grass: new THREE.Color("#6a7d38"),
+  meadow: new THREE.Color("#3d5c28"),
+  wet: new THREE.Color("#2f4030"),
+  drive: new THREE.Color("#9a8d78"),
+  sewer: new THREE.Color("#6a5340"),
 };
 
 function terrainVertexColor(x: number, z: number): THREE.Color {
@@ -74,7 +74,7 @@ function TerrainMesh() {
 
   return (
     <mesh geometry={geometry} position={[PLOT_WE / 2, 0, PLOT_NS / 2]} receiveShadow>
-      <meshStandardMaterial vertexColors roughness={0.92} metalness={0.02} />
+      <meshLambertMaterial vertexColors />
     </mesh>
   );
 }
@@ -146,7 +146,7 @@ function Terrace() {
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[eastW, 0.12, eastD]} />
+        <boxGeometry args={[eastW, 0.18, eastD]} />
         <meshStandardMaterial color="#c69b6b" roughness={0.7} />
       </mesh>
       <mesh
@@ -154,7 +154,7 @@ function Terrace() {
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[southW, 0.12, southD]} />
+        <boxGeometry args={[southW, 0.18, southD]} />
         <meshStandardMaterial color="#c69b6b" roughness={0.7} />
       </mesh>
     </group>
@@ -204,7 +204,7 @@ function FruitTree({
 function GrassClumps() {
   const clumps = useMemo(() => {
     const items: Array<{ x: number; z: number; h: number }> = [];
-    for (let i = 0; i < 70; i += 1) {
+    for (let i = 0; i < 110; i += 1) {
       const x = TERRACE_EAST_X + 5.2 + ((i * 17) % 37) * 0.12;
       const z = 5.2 + ((i * 13) % 41) * 0.28;
       if (x >= PLOT_WE - GESUT.sewer.westOfEastBoundaryM.max) continue;
@@ -229,9 +229,9 @@ function GrassClumps() {
 
 function NeighborBelt() {
   const trees = useMemo(() => {
-    return Array.from({ length: 9 }, (_, i) => ({
-      x: PLOT_WE + 3.2 + (i % 2) * 1.6,
-      z: 1.4 + i * 2.15,
+    return Array.from({ length: 12 }, (_, i) => ({
+      x: PLOT_WE + 2.8 + (i % 2) * 1.8,
+      z: 0.8 + i * 1.7,
     }));
   }, []);
 
@@ -269,7 +269,7 @@ function UtilityLine({
       return new THREE.Vector3(x, y, z);
     });
     const curve = new THREE.CatmullRomCurve3(curvePoints, false, "chordal");
-    return new THREE.TubeGeometry(curve, 40, 0.08, 8, false);
+      return new THREE.TubeGeometry(curve, 40, 0.14, 8, false);
   }, [points, yLift]);
 
   return (
@@ -423,6 +423,42 @@ function CardinalLabels() {
   );
 }
 
+function SurroundGround() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[PLOT_WE / 2, -0.18, PLOT_NS / 2]} receiveShadow>
+      <planeGeometry args={[90, 60]} />
+      <meshLambertMaterial color="#b7b09a" />
+    </mesh>
+  );
+}
+
+function CascadeBands() {
+  const bands = [
+    { x0: TERRACE_EAST_X, x1: TERRACE_EAST_X + 4.6, color: "#5c8a3a", lift: 0.05 },
+    { x0: TERRACE_EAST_X + 4.6, x1: PLOT_WE - GESUT.sewer.westOfEastBoundaryM.max, color: "#7a8640", lift: 0.1 },
+    { x0: PLOT_WE - GESUT.sewer.westOfEastBoundaryM.max, x1: PLOT_WE - 0.35, color: "#3f6a2c", lift: 0.16 },
+  ];
+  const z0 = SETBACKS.north + 0.4;
+  const z1 = PLOT_NS - 0.8;
+
+  return (
+    <group>
+      {bands.map((band) => {
+        const w = band.x1 - band.x0;
+        const d = z1 - z0;
+        const cx = band.x0 + w / 2;
+        const cz = z0 + d / 2;
+        return (
+          <mesh key={band.x0} position={[cx, heightAt(cx, cz) + band.lift, cz]} receiveShadow>
+            <boxGeometry args={[w, 0.08, d]} />
+            <meshLambertMaterial color={band.color} />
+          </mesh>
+        );
+      })}
+    </group>
+  );
+}
+
 function WestRoad() {
   const geo = useMemo(() => {
     const geometry = new THREE.PlaneGeometry(4.2, PLOT_NS, 1, 8);
@@ -450,24 +486,26 @@ function SceneContent() {
     <>
       <color attach="background" args={["#e7e2d6"]} />
       <fog attach="fog" args={["#e7e2d6", 55, 95]} />
-      <hemisphereLight args={["#fff4d6", "#6d7a58", 0.75]} />
+      <hemisphereLight args={["#ffe7b0", "#3f4a32", 0.55]} />
       <directionalLight
-        position={[38, 16, 6]}
-        intensity={1.55}
-        color="#fff1c8"
+        position={[42, 14, 8]}
+        intensity={1.05}
+        color="#ffd89a"
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
         shadow-camera-near={1}
-        shadow-camera-far={80}
-        shadow-camera-left={-30}
-        shadow-camera-right={30}
-        shadow-camera-top={24}
-        shadow-camera-bottom={-24}
+        shadow-camera-far={90}
+        shadow-camera-left={-36}
+        shadow-camera-right={36}
+        shadow-camera-top={28}
+        shadow-camera-bottom={-28}
       />
-      <ambientLight intensity={0.22} />
+      <ambientLight intensity={0.28} />
+      <SurroundGround />
       <WestRoad />
       <TerrainMesh />
+      <CascadeBands />
       <PlotBoundary />
       <House />
       <Terrace />
@@ -482,11 +520,11 @@ function SceneContent() {
         makeDefault
         enableDamping
         dampingFactor={0.08}
-        minDistance={8}
-        maxDistance={70}
-        minPolarAngle={0.18}
-        maxPolarAngle={Math.PI / 2 - 0.08}
-        target={[PLOT_WE * 0.48, 2.2, PLOT_NS * 0.5]}
+        minDistance={16}
+        maxDistance={90}
+        minPolarAngle={0.22}
+        maxPolarAngle={Math.PI / 2 - 0.12}
+        target={[PLOT_WE * 0.52, 1.6, PLOT_NS * 0.55]}
       />
     </>
   );
@@ -495,7 +533,7 @@ function SceneContent() {
 export function Plot3DScene() {
   return (
     <Canvas
-      camera={{ position: [18, 16, 34], fov: 38, near: 0.1, far: 160 }}
+      camera={{ position: [52, 22, 40], fov: 42, near: 0.1, far: 180 }}
       shadows
       dpr={[1, 2]}
       gl={{ antialias: true }}
